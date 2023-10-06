@@ -1,6 +1,15 @@
+import 'package:cinephile/data/core/api_client.dart';
+import 'package:cinephile/data/dataSources/movie_remote_data_source.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 
 void main() {
+  ApiClient apiClient = ApiClient(Client());
+  MovieRemoteDataSource dataSource = MovieRemoteDataSourceImpl(apiClient);
+  dataSource.getTrending();
+  dataSource.getPopular();
+  dataSource.getPlayingNow();
+  dataSource.getComingSoon();
   runApp(const MyApp());
 }
 
