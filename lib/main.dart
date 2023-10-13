@@ -6,7 +6,7 @@ import 'package:cinephile/domain/usecases/get_trending.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 
-import 'dependancyInjection/get_it.dart' as getIt;
+import 'dependencyInjection/get_it.dart' as getIt;
 import 'domain/entities/movie_entity.dart';
 
 Future<void> main() async {
