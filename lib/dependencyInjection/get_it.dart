@@ -1,6 +1,8 @@
 import 'package:cinephile/data/core/api_client.dart';
 import 'package:cinephile/data/repositories/movie_repository_impl.dart';
 import 'package:cinephile/domain/repositories/movie_repository.dart';
+import 'package:cinephile/presentation/blocs/movie_backdrop/movie_backdrop_bloc.dart';
+import 'package:cinephile/presentation/blocs/movie_carousel/movie_carousel_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart';
 
@@ -35,4 +37,9 @@ Future init() async {
 
   getItInstance.registerLazySingleton<MovieRepository>(
       () => MovieRepositoryImpl(getItInstance()));
+
+  getItInstance.registerFactory(() => MovieBackDropBloc());
+
+  getItInstance.registerFactory(() => MovieCarouselBloc(
+      getTrending: getItInstance(), movieBackDropBloc: getItInstance()));
 }
