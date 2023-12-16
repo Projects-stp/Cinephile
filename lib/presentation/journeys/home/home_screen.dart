@@ -3,6 +3,8 @@ import 'package:cinephile/presentation/blocs/movie_backdrop/movie_backdrop_bloc.
 import 'package:cinephile/presentation/blocs/movie_carousel/movie_carousel_bloc.dart';
 import 'package:cinephile/presentation/blocs/movie_carousel/movie_carousel_event.dart';
 import 'package:cinephile/presentation/blocs/movie_carousel/movie_carousel_state.dart';
+import 'package:cinephile/presentation/blocs/movie_tabbed/movie_tabbed_bloc.dart';
+import 'package:cinephile/presentation/journeys/home/movie_tabbed/movie_tabbed_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -18,12 +20,14 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   late MovieCarouselBloc movieCarouselBloc;
   late MovieBackDropBloc movieBackDropBloc;
+  late MovieTabbedBloc movieTabbedBloc;
 
   @override
   void initState() {
     super.initState();
     movieCarouselBloc = getItInstance<MovieCarouselBloc>();
     movieBackDropBloc = movieCarouselBloc.movieBackDropBloc;
+    movieTabbedBloc = getItInstance<MovieTabbedBloc>();
     movieCarouselBloc.add(const CarouselLoadEvent());
   }
 
@@ -32,6 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.dispose();
     movieCarouselBloc.close();
     movieBackDropBloc.close();
+    movieTabbedBloc.close();
   }
 
   @override
@@ -43,6 +48,9 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         BlocProvider(
           create: (context) => movieBackDropBloc,
+        ),
+        BlocProvider(
+          create: (context) => movieTabbedBloc,
         ),
       ],
       child: Scaffold(
@@ -61,12 +69,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       defaultIndex: state.defaultIndex,
                     ),
                   ),
-                  FractionallySizedBox(
+                  const FractionallySizedBox(
                     alignment: Alignment.bottomCenter,
                     heightFactor: 0.35,
-                    child: Placeholder(
-                      color: Colors.white,
-                    ),
+                    child: MovieTabbedWidget(),
                   ),
                 ],
               );
