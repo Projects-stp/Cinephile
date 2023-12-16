@@ -20,21 +20,24 @@ class TabTitleWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.transparent,
-          border: Border(
-            bottom: BorderSide(
-              color: isSelected ? AppColor.royalBlue : Colors.transparent,
-              width: Sizes.dimen_1.h,
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 10.0),
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.transparent,
+            border: Border(
+              bottom: BorderSide(
+                color: isSelected ? AppColor.royalBlue : Colors.transparent,
+                width: Sizes.dimen_1.h,
+              ),
             ),
           ),
-        ),
-        child: Text(
-          title,
-          style: isSelected
-              ? Theme.of(context).textTheme.royalBlueSubtitle1
-              : Theme.of(context).textTheme.titleMedium,
+          child: Text(
+            title,
+            style: isSelected
+                ? Theme.of(context).textTheme.royalBlueSubtitle1
+                : Theme.of(context).textTheme.titleMedium,
+          ),
         ),
       ),
     );

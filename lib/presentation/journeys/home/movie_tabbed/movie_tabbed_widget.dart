@@ -39,7 +39,7 @@ class _MovieTabbedWidgetState extends State<MovieTabbedWidget>
     return BlocBuilder<MovieTabbedBloc, MovieTabbedState>(
       builder: (context, state) {
         return Padding(
-          padding: EdgeInsets.only(top: Sizes.dimen_4.h),
+          padding: EdgeInsets.only(top: Sizes.dimen_2.h),
           child: Column(
             children: <Widget>[
               Row(
