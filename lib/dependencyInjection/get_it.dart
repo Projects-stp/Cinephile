@@ -1,6 +1,7 @@
 import 'package:cinephile/data/core/api_client.dart';
 import 'package:cinephile/data/repositories/movie_repository_impl.dart';
 import 'package:cinephile/domain/repositories/movie_repository.dart';
+import 'package:cinephile/presentation/blocs/language_bloc/language_bloc_bloc.dart';
 import 'package:cinephile/presentation/blocs/movie_backdrop/movie_backdrop_bloc.dart';
 import 'package:cinephile/presentation/blocs/movie_carousel/movie_carousel_bloc.dart';
 import 'package:cinephile/presentation/blocs/movie_tabbed/movie_tabbed_bloc.dart';
@@ -51,4 +52,6 @@ Future init() async {
       GetComingSoon(getItInstance()),
     ),
   );
+
+  getItInstance.registerSingleton<LanguageBlocBloc>(LanguageBlocBloc());
 }

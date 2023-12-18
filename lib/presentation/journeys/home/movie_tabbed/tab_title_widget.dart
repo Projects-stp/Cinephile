@@ -1,5 +1,6 @@
 import 'package:cinephile/common/constants/size_constants.dart';
 import 'package:cinephile/common/extensions/size_extensions.dart';
+import 'package:cinephile/common/extensions/string_extension.dart';
 import 'package:cinephile/presentation/themes/app_color.dart';
 import 'package:cinephile/presentation/themes/theme_text.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +34,7 @@ class TabTitleWidget extends StatelessWidget {
             ),
           ),
           child: Text(
-            title,
+            title.t(context),
             style: isSelected
                 ? Theme.of(context).textTheme.royalBlueSubtitle1
                 : Theme.of(context).textTheme.titleMedium,

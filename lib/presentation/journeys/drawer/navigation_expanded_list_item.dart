@@ -4,7 +4,7 @@ import 'navigation_list_item.dart';
 
 class NavigationExpandedListItem extends StatelessWidget {
   final String title;
-  final Function() onPressed;
+  final Function(int index) onPressed;
   final List<String> children;
 
   const NavigationExpandedListItem({
@@ -34,7 +34,7 @@ class NavigationExpandedListItem extends StatelessWidget {
           for (int i = 0; i < children.length; i++)
             NavigationSubListItem(
               title: children[i],
-              onPressed: () {},
+              onPressed: () => onPressed(i),
             ),
         ],
       ),
