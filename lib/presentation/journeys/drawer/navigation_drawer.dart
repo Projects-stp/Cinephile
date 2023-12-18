@@ -4,8 +4,6 @@ import 'package:cinephile/presentation/journeys/drawer/navigation_expanded_list_
 import 'package:cinephile/presentation/journeys/drawer/navigation_list_item.dart';
 import 'package:flutter/material.dart';
 
-import '../../widgets/logo.dart';
-
 class NavigationDrawerH extends StatelessWidget {
   const NavigationDrawerH({super.key});
 
@@ -27,13 +25,20 @@ class NavigationDrawerH extends StatelessWidget {
           children: [
             Padding(
               padding: EdgeInsets.only(
-                top: Sizes.dimen_1.h,
+                top: Sizes.dimen_14.h,
                 bottom: Sizes.dimen_18.h,
                 left: Sizes.dimen_8.w,
                 right: Sizes.dimen_8.w,
               ),
-              child: Logo(
-                height: Sizes.dimen_20.h,
+              child: const Center(
+                child: Text(
+                  'Cinephile',
+                  style: TextStyle(
+                    fontSize: 40,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 0.8,
+                  ),
+                ),
               ),
             ),
             NavigationListItem(title: 'Favourite Movies', onPressed: () {}),
