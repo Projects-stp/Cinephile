@@ -4,6 +4,7 @@ import 'package:cinephile/presentation/blocs/movie_carousel/movie_carousel_bloc.
 import 'package:cinephile/presentation/blocs/movie_carousel/movie_carousel_event.dart';
 import 'package:cinephile/presentation/blocs/movie_carousel/movie_carousel_state.dart';
 import 'package:cinephile/presentation/blocs/movie_tabbed/movie_tabbed_bloc.dart';
+import 'package:cinephile/presentation/journeys/drawer/navigation_drawer.dart';
 import 'package:cinephile/presentation/journeys/home/movie_tabbed/movie_tabbed_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -54,6 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ],
       child: Scaffold(
+        drawer: const NavigationDrawerH(),
         body: BlocBuilder<MovieCarouselBloc, MovieCarouselState>(
           bloc: movieCarouselBloc,
           builder: (context, state) {
