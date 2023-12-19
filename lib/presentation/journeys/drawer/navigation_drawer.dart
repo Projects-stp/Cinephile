@@ -11,6 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wiredash/wiredash.dart';
 
 import '../../blocs/language_bloc/language_bloc_event.dart';
+import '../../widgets/app_dialog.dart';
 
 class NavigationDrawerH extends StatelessWidget {
   const NavigationDrawerH({super.key});
@@ -73,9 +74,27 @@ class NavigationDrawerH extends StatelessWidget {
             ),
             NavigationListItem(
               title: TranslationConstants.about.t(context),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).pop();
+                _showDialog(context);
+              },
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  void _showDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AppDialog(
+        title: TranslationConstants.about,
+        description: TranslationConstants.aboutDescription,
+        buttonText: TranslationConstants.okay,
+        image: Image.asset(
+          'assets/pngs/tmdb_logo.png',
+          height: Sizes.dimen_32.h,
         ),
       ),
     );
