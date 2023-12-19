@@ -23,7 +23,7 @@ class MovieCarouselBloc extends Bloc<MovieCarouselEvent, MovieCarouselState> {
     if (event is CarouselLoadEvent) {
       final moviesEither = await getTrending(NoParams());
       yield moviesEither.fold(
-        (l) => MovieCarouselError(),
+        (l) => MovieCarouselError(l.appErrorType),
         (movies) {
           movieBackDropBloc.add(MovieBackDropChangedEvent(movies[event.defaultIndex]));
           return MovieCarouselLoaded(

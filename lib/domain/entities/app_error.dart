@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 class AppError extends Equatable {
-  final String appErrorType;
+  final AppErrorType appErrorType;
 
   const AppError(
     this.appErrorType,
@@ -11,10 +11,10 @@ class AppError extends Equatable {
   List<Object> get props => [appErrorType];
 }
 
-// enum AppErrorType {
-//   api,
-//   network,
-//   database,
-//   unauthorised,
-//   sessionDenied,
-// }
+enum AppErrorType {
+  api,
+  network,
+  // database,
+  // unauthorised,
+  // sessionDenied,
+}

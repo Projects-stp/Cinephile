@@ -1,3 +1,4 @@
+import 'package:cinephile/domain/entities/app_error.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../../domain/entities/movie_entity.dart';
@@ -28,7 +29,10 @@ class MovieTabChanges extends MovieTabbedState {
 }
 
 class MovieTabLoadError extends MovieTabbedState {
+  final AppErrorType errorType;
+
   const MovieTabLoadError({
     required int currentTabIndex,
+    required this.errorType,
   }) : super(currentTabIndex: currentTabIndex);
 }

@@ -1,11 +1,14 @@
 import 'package:cinephile/common/constants/size_constants.dart';
+import 'package:cinephile/common/constants/translation_constants.dart';
 import 'package:cinephile/common/extensions/size_extensions.dart';
+import 'package:cinephile/common/extensions/string_extension.dart';
 import 'package:cinephile/presentation/blocs/movie_tabbed/movie_tabbed_bloc.dart';
 import 'package:cinephile/presentation/blocs/movie_tabbed/movie_tabbed_event.dart';
 import 'package:cinephile/presentation/blocs/movie_tabbed/movie_tabbed_state.dart';
 import 'package:cinephile/presentation/journeys/home/movie_tabbed/movie_list_view_builder.dart';
 import 'package:cinephile/presentation/journeys/home/movie_tabbed/movie_tabbed_constants.dart';
 import 'package:cinephile/presentation/journeys/home/movie_tabbed/tab_title_widget.dart';
+import 'package:cinephile/presentation/widgets/app_error_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -58,8 +61,31 @@ class _MovieTabbedWidgetState extends State<MovieTabbedWidget>
                 ],
               ),
               if (state is MovieTabChanges)
+                state.movies.isEmpty
+                    ? Expanded(
+                        child: Center(
+                          child: Text(
+                            TranslationConstants.noMovies.t(context),
+                            textAlign: TextAlign.center,
+                            style: Theme.of(context).textTheme.titleMedium,
+                          ),
+                        ),
+                      )
+                    : Expanded(
+                        child: MovieListViewBuilder(
+                          movies: state.movies,
+                        ),
+                      ),
+              if (state is MovieTabLoadError)
                 Expanded(
-                  child: MovieListViewBuilder(movies: state.movies),
+                  child: AppErrorWidget(
+                    errorType: state.errorType,
+                    onPressed: () => movieTabbedBloc.add(
+                      MovieTabChangedEvent(
+                        currentTabIndex: state.currentTabIndex,
+                      ),
+                    ),
+                  ),
                 ),
             ],
           ),

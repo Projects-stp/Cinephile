@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cinephile/data/dataSources/movie_remote_data_source.dart';
 import 'package:cinephile/data/models/movie_model.dart';
 import 'package:cinephile/domain/entities/movie_entity.dart';
@@ -18,9 +20,13 @@ class MovieRepositoryImpl extends MovieRepository {
     try {
       final movies = await remoteDataSource.getTrending();
       return Right(movies);
+    } on SocketException {
+      return const Left(
+        AppError(AppErrorType.network),
+      );
     } on Exception {
       return const Left(
-        AppError('Something went wrong'),
+        AppError(AppErrorType.api),
       );
     }
   }
@@ -30,9 +36,13 @@ class MovieRepositoryImpl extends MovieRepository {
     try {
       final movies = await remoteDataSource.getComingSoon();
       return Right(movies);
+    } on SocketException {
+      return const Left(
+        AppError(AppErrorType.network),
+      );
     } on Exception {
       return const Left(
-        AppError('Something went wrong'),
+        AppError(AppErrorType.api),
       );
     }
   }
@@ -42,9 +52,13 @@ class MovieRepositoryImpl extends MovieRepository {
     try {
       final movies = await remoteDataSource.getPlayingNow();
       return Right(movies);
+    } on SocketException {
+      return const Left(
+        AppError(AppErrorType.network),
+      );
     } on Exception {
       return const Left(
-        AppError('Something went wrong'),
+        AppError(AppErrorType.api),
       );
     }
   }
@@ -54,9 +68,13 @@ class MovieRepositoryImpl extends MovieRepository {
     try {
       final movies = await remoteDataSource.getPopular();
       return Right(movies);
+    } on SocketException {
+      return const Left(
+        AppError(AppErrorType.network),
+      );
     } on Exception {
       return const Left(
-        AppError('Something went wrong'),
+        AppError(AppErrorType.api),
       );
     }
   }

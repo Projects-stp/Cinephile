@@ -9,6 +9,7 @@ import 'package:cinephile/presentation/journeys/home/movie_tabbed/movie_tabbed_w
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../widgets/app_error_widget.dart';
 import 'movie_carousel/movie_carousel_widget.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -77,6 +78,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: MovieTabbedWidget(),
                   ),
                 ],
+              );
+            } else if (state is MovieCarouselError) {
+              return AppErrorWidget(
+                onPressed: () => movieCarouselBloc.add(
+                  const CarouselLoadEvent(),
+                ),
+                errorType: state.errorType,
               );
             }
             return const SizedBox.shrink();
