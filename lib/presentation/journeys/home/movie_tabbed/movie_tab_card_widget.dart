@@ -5,6 +5,9 @@ import 'package:cinephile/common/extensions/string_extension.dart';
 import 'package:cinephile/data/core/api_constants.dart';
 import 'package:flutter/material.dart';
 
+import '../../movie_detail/movie_detail_arguments.dart';
+import '../../movie_detail/movie_detail_screen.dart';
+
 class MovieTabCardWidget extends StatelessWidget {
   final int movieId;
   final String title, posterPath;
@@ -19,7 +22,15 @@ class MovieTabCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => MovieDetailScreen(
+              movieDetailArguments: MovieDetailArguments(movieId),
+            ),
+          ),
+        );
+      },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[

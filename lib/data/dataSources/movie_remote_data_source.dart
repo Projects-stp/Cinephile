@@ -2,6 +2,8 @@ import 'package:cinephile/data/core/api_client.dart';
 import 'package:cinephile/data/models/movie_model.dart';
 import 'package:cinephile/data/models/movie_result_model.dart';
 
+import '../models/movie_detail_model.dart';
+
 abstract class MovieRemoteDataSource {
   Future<List<MovieModel>> getTrending();
 
@@ -10,6 +12,8 @@ abstract class MovieRemoteDataSource {
   Future<List<MovieModel>> getPlayingNow();
 
   Future<List<MovieModel>> getComingSoon();
+
+  Future<MovieDetailModel> getMovieDetail(int id);
 }
 
 class MovieRemoteDataSourceImpl extends MovieRemoteDataSource {
@@ -47,5 +51,13 @@ class MovieRemoteDataSourceImpl extends MovieRemoteDataSource {
     final movies = MoviesResultModel.fromJson(response).movies;
     print(movies);
     return movies;
+  }
+
+  @override
+  Future<MovieDetailModel> getMovieDetail(int id) async {
+    final response = await _client.get('movie/$id');
+    final movie = MovieDetailModel.fromJson(response);
+    print(movie);
+    return movie;
   }
 }
