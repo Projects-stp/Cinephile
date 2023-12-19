@@ -8,6 +8,7 @@ import 'package:cinephile/presentation/journeys/drawer/navigation_expanded_list_
 import 'package:cinephile/presentation/journeys/drawer/navigation_list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wiredash/wiredash.dart';
 
 import '../../blocs/language_bloc/language_bloc_event.dart';
 
@@ -65,7 +66,10 @@ class NavigationDrawerH extends StatelessWidget {
             ),
             NavigationListItem(
               title: TranslationConstants.feedback.t(context),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).pop();
+                Wiredash.of(context).show();
+              },
             ),
             NavigationListItem(
               title: TranslationConstants.about.t(context),
