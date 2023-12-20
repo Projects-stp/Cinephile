@@ -4,7 +4,9 @@ import 'package:cinephile/dependencyInjection/get_it.dart';
 import 'package:cinephile/presentation/blocs/cast/cast_bloc.dart';
 import 'package:cinephile/presentation/blocs/movie_detail/movie_detail_bloc.dart';
 import 'package:cinephile/presentation/blocs/movie_detail/movie_detail_event.dart';
+import 'package:cinephile/presentation/blocs/videos/videos_bloc.dart';
 import 'package:cinephile/presentation/journeys/movie_detail/movie_detail_arguments.dart';
+import 'package:cinephile/presentation/journeys/movie_detail/videos_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -29,12 +31,14 @@ class MovieDetailScreen extends StatefulWidget {
 class _MovieDetailScreenState extends State<MovieDetailScreen> {
   late MovieDetailBloc _movieDetailBloc;
   late CastBloc _castBloc;
+  late VideosBloc _videosBloc;
 
   @override
   void initState() {
     super.initState();
     _movieDetailBloc = getItInstance<MovieDetailBloc>();
     _castBloc = _movieDetailBloc.castBloc;
+    _videosBloc = _movieDetailBloc.videosBloc;
     _movieDetailBloc.add(
       MovieDetailLoadEvent(
         widget.movieDetailArguments.movieId,
@@ -46,6 +50,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
   void dispose() {
     _movieDetailBloc.close();
     _castBloc.close();
+    _videosBloc.close();
     super.dispose();
   }
 
@@ -56,6 +61,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
         providers: [
           BlocProvider.value(value: _movieDetailBloc),
           BlocProvider.value(value: _castBloc),
+          BlocProvider.value(value: _videosBloc),
         ],
         child: BlocBuilder<MovieDetailBloc, MovieDetailState>(
           builder: (context, state) {
@@ -91,6 +97,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                       ),
                     ),
                     const CastWidget(),
+                    VideosWidget(videoBloc: _videosBloc),
                   ],
                 ),
               );

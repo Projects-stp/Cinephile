@@ -1,0 +1,20 @@
+import 'package:cinephile/domain/usecases/usecases.dart';
+import 'package:dartz/dartz.dart';
+
+import '../entities/app_error.dart';
+import '../entities/movie_params.dart';
+import '../entities/video_entity.dart';
+import '../repositories/movie_repository.dart';
+
+class GetVideos extends UseCase<List<VideoEntity>, MovieParams> {
+  final MovieRepository repository;
+
+  GetVideos(this.repository);
+
+  @override
+  Future<Either<AppError, List<VideoEntity>>> call(
+    MovieParams params,
+  ) async {
+    return await repository.getVideos(params.id);
+  }
+}
