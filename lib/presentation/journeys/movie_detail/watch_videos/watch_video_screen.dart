@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cinephile/common/extensions/size_extensions.dart';
 import 'package:cinephile/common/extensions/string_extension.dart';
 import 'package:cinephile/presentation/journeys/movie_detail/watch_videos/watch_videos_argument.dart';
-import 'package:cinephile/presentation/themes/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
@@ -52,7 +51,7 @@ class _WatchVideoScreenState extends State<WatchVideoScreen> {
         title: Text(
           TranslationConstants.watchTrailers.t(context),
         ),
-        backgroundColor: AppColor.royalBlue,
+        backgroundColor: Colors.black54,
         centerTitle: true,
       ),
       body: YoutubePlayerBuilder(

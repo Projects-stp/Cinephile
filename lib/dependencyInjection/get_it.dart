@@ -10,6 +10,7 @@ import 'package:cinephile/presentation/blocs/movie_backdrop/movie_backdrop_bloc.
 import 'package:cinephile/presentation/blocs/movie_carousel/movie_carousel_bloc.dart';
 import 'package:cinephile/presentation/blocs/movie_detail/movie_detail_bloc.dart';
 import 'package:cinephile/presentation/blocs/movie_tabbed/movie_tabbed_bloc.dart';
+import 'package:cinephile/presentation/blocs/search_movies/search_movies_bloc.dart';
 import 'package:cinephile/presentation/blocs/videos/videos_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart';
@@ -19,6 +20,7 @@ import '../domain/usecases/get_coming_soon.dart';
 import '../domain/usecases/get_playing_now.dart';
 import '../domain/usecases/get_popular.dart';
 import '../domain/usecases/get_trending.dart';
+import '../domain/usecases/search_movies.dart';
 
 final getItInstance = GetIt.I;
 
@@ -47,6 +49,9 @@ Future init() async {
       () => GetMovieDetail(getItInstance()));
 
   getItInstance.registerLazySingleton<GetCast>(() => GetCast(getItInstance()));
+
+  getItInstance
+      .registerLazySingleton<SearchMovies>(() => SearchMovies(getItInstance()));
 
   getItInstance
       .registerLazySingleton<GetVideos>(() => GetVideos(getItInstance()));
@@ -84,6 +89,12 @@ Future init() async {
   getItInstance.registerFactory(
     () => VideosBloc(
       getVideos: getItInstance(),
+    ),
+  );
+
+  getItInstance.registerFactory(
+    () => SearchMovieBloc(
+      searchMovies: getItInstance(),
     ),
   );
 
