@@ -12,6 +12,7 @@ import 'package:wiredash/wiredash.dart';
 
 import '../../blocs/language_bloc/language_bloc_event.dart';
 import '../../widgets/app_dialog.dart';
+import '../favorite_screen/favorite_screen.dart';
 
 class NavigationDrawerH extends StatelessWidget {
   const NavigationDrawerH({super.key});
@@ -52,7 +53,13 @@ class NavigationDrawerH extends StatelessWidget {
             ),
             NavigationListItem(
               title: TranslationConstants.favoriteMovies.t(context),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => FavoriteScreen(),
+                  ),
+                );
+              },
             ),
             NavigationExpandedListItem(
               title: TranslationConstants.language.t(context),

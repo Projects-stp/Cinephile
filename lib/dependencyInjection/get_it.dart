@@ -1,10 +1,16 @@
 import 'package:cinephile/data/core/api_client.dart';
+import 'package:cinephile/data/dataSources/movie_local_data_source.dart';
 import 'package:cinephile/data/repositories/movie_repository_impl.dart';
 import 'package:cinephile/domain/repositories/movie_repository.dart';
+import 'package:cinephile/domain/usecases/check_if_movie_favorite.dart';
+import 'package:cinephile/domain/usecases/delete_favourite_movies.dart';
 import 'package:cinephile/domain/usecases/get_cast.dart';
+import 'package:cinephile/domain/usecases/get_favoutites_movies.dart';
 import 'package:cinephile/domain/usecases/get_movie_details.dart';
 import 'package:cinephile/domain/usecases/get_videos.dart';
+import 'package:cinephile/domain/usecases/save_movie.dart';
 import 'package:cinephile/presentation/blocs/cast/cast_bloc.dart';
+import 'package:cinephile/presentation/blocs/favorite/favotite_bloc.dart';
 import 'package:cinephile/presentation/blocs/language_bloc/language_bloc_bloc.dart';
 import 'package:cinephile/presentation/blocs/movie_backdrop/movie_backdrop_bloc.dart';
 import 'package:cinephile/presentation/blocs/movie_carousel/movie_carousel_bloc.dart';
@@ -33,6 +39,9 @@ Future init() async {
   getItInstance.registerLazySingleton<MovieRemoteDataSource>(
       () => MovieRemoteDataSourceImpl(getItInstance()));
 
+  getItInstance.registerLazySingleton<MovieLocalDataSource>(
+      () => MovieLocalDataSourceImpl());
+
   getItInstance
       .registerLazySingleton<GetTrending>(() => GetTrending(getItInstance()));
 
@@ -56,8 +65,20 @@ Future init() async {
   getItInstance
       .registerLazySingleton<GetVideos>(() => GetVideos(getItInstance()));
 
+  getItInstance
+      .registerLazySingleton<SaveMovie>(() => SaveMovie(getItInstance()));
+
+  getItInstance.registerLazySingleton<GetFavoriteMovies>(
+      () => GetFavoriteMovies(getItInstance()));
+
+  getItInstance.registerLazySingleton<DeleteFavoriteMovie>(
+      () => DeleteFavoriteMovie(getItInstance()));
+
+  getItInstance.registerLazySingleton<CheckIfFavoriteMovie>(
+      () => CheckIfFavoriteMovie(getItInstance()));
+
   getItInstance.registerLazySingleton<MovieRepository>(
-      () => MovieRepositoryImpl(getItInstance()));
+      () => MovieRepositoryImpl(getItInstance(), getItInstance()));
 
   getItInstance.registerFactory(() => MovieBackDropBloc());
 
@@ -77,6 +98,7 @@ Future init() async {
       getMovieDetail: getItInstance(),
       castBloc: getItInstance(),
       videosBloc: getItInstance(),
+      favoriteBloc: getItInstance(),
     ),
   );
 
@@ -99,4 +121,13 @@ Future init() async {
   );
 
   getItInstance.registerSingleton<LanguageBlocBloc>(LanguageBlocBloc());
+
+  getItInstance.registerFactory(
+    () => FavoriteBloc(
+      saveMovies: getItInstance(),
+      checkIfFavouriteMovie: getItInstance(),
+      deleteFavoriteMovie: getItInstance(),
+      getFavoriteMovies: getItInstance(),
+    ),
+  );
 }

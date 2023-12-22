@@ -8,14 +8,18 @@ import 'package:cinephile/domain/repositories/movie_repository.dart';
 import 'package:dartz/dartz.dart';
 
 import '../../domain/entities/app_error.dart';
+import '../dataSources/movie_local_data_source.dart';
 import '../models/cast_crew_result_data_model.dart';
 import '../models/movie_model.dart';
+import '../tables/movie_table.dart';
 
 class MovieRepositoryImpl extends MovieRepository {
   final MovieRemoteDataSource remoteDataSource;
+  final MovieLocalDataSource movieLocalDataSource;
 
   MovieRepositoryImpl(
     this.remoteDataSource,
+    this.movieLocalDataSource,
   );
 
   @override
@@ -129,6 +133,49 @@ class MovieRepositoryImpl extends MovieRepository {
       return const Left(AppError(AppErrorType.network));
     } on Exception {
       return const Left(AppError(AppErrorType.api));
+    }
+  }
+
+  @override
+  Future<Either<AppError, bool>> checkIfMovieFavorite(int movieId) async {
+    try {
+      final response = await movieLocalDataSource.checkIfMovieFavorite(movieId);
+      return Right(response);
+    } on Exception {
+      return const Left(AppError(AppErrorType.database));
+    }
+  }
+
+  @override
+  Future<Either<AppError, void>> deleteFavoriteMovie(int movieId) async {
+    try {
+      final response = await movieLocalDataSource.deleteMovie(movieId);
+      return Right(response);
+    } on Exception {
+      return const Left(AppError(AppErrorType.database));
+    }
+  }
+
+  @override
+  Future<Either<AppError, List<MovieEntity>>> getFavoriteMovies() async {
+    try {
+      final response = await movieLocalDataSource.getMovies();
+      return Right(response);
+    } on Exception {
+      return const Left(AppError(AppErrorType.database));
+    }
+  }
+
+  @override
+  Future<Either<AppError, void>> saveMovie(MovieEntity movieEntity) async {
+    try {
+      final table = MovieTable.fromMovieEntity(movieEntity);
+      print(table);
+      final response = await movieLocalDataSource
+          .saveMovie(MovieTable.fromMovieEntity(movieEntity));
+      return Right(response);
+    } on Exception {
+      return const Left(AppError(AppErrorType.database));
     }
   }
 }
