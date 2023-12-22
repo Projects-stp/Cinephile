@@ -16,3 +16,5 @@ class ToggleLanguageEvent extends LanguageBlocEvent {
   @override
   List<Object> get props => [language.code];
 }
+
+class LoadPrferredLanguageEvent extends LanguageBlocEvent {}

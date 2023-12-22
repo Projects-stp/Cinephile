@@ -2,6 +2,7 @@ import 'package:cinephile/common/constants/languages.dart';
 import 'package:cinephile/common/screenutil/screenutil.dart';
 import 'package:cinephile/dependencyInjection/get_it.dart';
 import 'package:cinephile/presentation/blocs/language_bloc/language_bloc_bloc.dart';
+import 'package:cinephile/presentation/blocs/language_bloc/language_bloc_event.dart';
 import 'package:cinephile/presentation/journeys/home/home_screen.dart';
 import 'package:cinephile/presentation/themes/app_color.dart';
 import 'package:cinephile/presentation/themes/theme_text.dart';
@@ -28,6 +29,7 @@ class _MovieAppState extends State<MovieApp> {
   void initState() {
     super.initState();
     _languageBloc = getItInstance<LanguageBlocBloc>();
+    _languageBloc.add(LoadPrferredLanguageEvent());
   }
 
   @override
