@@ -1,4 +1,5 @@
 import 'package:cinephile/common/constants/languages.dart';
+import 'package:cinephile/common/constants/route_constants.dart';
 import 'package:cinephile/common/constants/size_constants.dart';
 import 'package:cinephile/common/constants/translation_constants.dart';
 import 'package:cinephile/common/extensions/size_extensions.dart';
@@ -12,7 +13,6 @@ import 'package:wiredash/wiredash.dart';
 
 import '../../blocs/language_bloc/language_bloc_event.dart';
 import '../../widgets/app_dialog.dart';
-import '../favorite_screen/favorite_screen.dart';
 
 class NavigationDrawerH extends StatelessWidget {
   const NavigationDrawerH({super.key});
@@ -54,11 +54,7 @@ class NavigationDrawerH extends StatelessWidget {
             NavigationListItem(
               title: TranslationConstants.favoriteMovies.t(context),
               onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => FavoriteScreen(),
-                  ),
-                );
+                Navigator.of(context).pushNamed(RouteList.favorite);
               },
             ),
             NavigationExpandedListItem(

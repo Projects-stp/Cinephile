@@ -1,9 +1,10 @@
 import 'package:cinephile/common/constants/languages.dart';
+import 'package:cinephile/common/constants/route_constants.dart';
 import 'package:cinephile/common/screenutil/screenutil.dart';
 import 'package:cinephile/dependencyInjection/get_it.dart';
 import 'package:cinephile/presentation/blocs/language_bloc/language_bloc_bloc.dart';
 import 'package:cinephile/presentation/blocs/language_bloc/language_bloc_event.dart';
-import 'package:cinephile/presentation/journeys/home/home_screen.dart';
+import 'package:cinephile/presentation/routes.dart';
 import 'package:cinephile/presentation/themes/app_color.dart';
 import 'package:cinephile/presentation/themes/theme_text.dart';
 import 'package:cinephile/presentation/wiredash_app.dart';
@@ -13,6 +14,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'app_localization.dart';
 import 'blocs/language_bloc/language_bloc_state.dart';
+import 'fade_page_route_builder.dart';
 
 class MovieApp extends StatefulWidget {
   const MovieApp({super.key});
@@ -69,7 +71,18 @@ class _MovieAppState extends State<MovieApp> {
                   GlobalWidgetsLocalizations.delegate,
                   GlobalCupertinoLocalizations.delegate,
                 ],
-                home: const HomeScreen(),
+                builder: (context, child) {
+                  return child!;
+                },
+                initialRoute: RouteList.initial,
+                onGenerateRoute: (RouteSettings settings) {
+                  final routes = Routes.getRoutes(settings);
+                  final WidgetBuilder? builder = routes[settings.name];
+                  return FadePageRouteBuilder(
+                    builder: builder!,
+                    settings: settings,
+                  );
+                },
               ),
             );
           }
