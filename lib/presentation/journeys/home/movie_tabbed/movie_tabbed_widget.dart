@@ -12,6 +12,8 @@ import 'package:cinephile/presentation/widgets/app_error_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../loading_screen/loading_circle.dart';
+
 class MovieTabbedWidget extends StatefulWidget {
   const MovieTabbedWidget({super.key});
 
@@ -84,6 +86,14 @@ class _MovieTabbedWidgetState extends State<MovieTabbedWidget>
                       MovieTabChangedEvent(
                         currentTabIndex: state.currentTabIndex,
                       ),
+                    ),
+                  ),
+                ),
+              if (state is MovieTabbedLoading)
+                Expanded(
+                  child: Center(
+                    child: LoadingCircle(
+                      size: Sizes.dimen_100.w,
                     ),
                   ),
                 ),

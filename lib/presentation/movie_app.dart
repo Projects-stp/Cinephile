@@ -4,6 +4,8 @@ import 'package:cinephile/common/screenutil/screenutil.dart';
 import 'package:cinephile/dependencyInjection/get_it.dart';
 import 'package:cinephile/presentation/blocs/language_bloc/language_bloc_bloc.dart';
 import 'package:cinephile/presentation/blocs/language_bloc/language_bloc_event.dart';
+import 'package:cinephile/presentation/blocs/loading/loading_bloc.dart';
+import 'package:cinephile/presentation/journeys/loading_screen/loading_screen.dart';
 import 'package:cinephile/presentation/routes.dart';
 import 'package:cinephile/presentation/themes/app_color.dart';
 import 'package:cinephile/presentation/themes/theme_text.dart';
@@ -26,25 +28,31 @@ class MovieApp extends StatefulWidget {
 class _MovieAppState extends State<MovieApp> {
   late LanguageBlocBloc _languageBloc;
   final _navigatorKey = GlobalKey<NavigatorState>();
+  late LoadingBloc _loadingBloc;
 
   @override
   void initState() {
     super.initState();
     _languageBloc = getItInstance<LanguageBlocBloc>();
     _languageBloc.add(LoadPrferredLanguageEvent());
+    _loadingBloc = getItInstance<LoadingBloc>();
   }
 
   @override
   void dispose() {
     _languageBloc.close();
+    _loadingBloc.close();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init();
-    return BlocProvider<LanguageBlocBloc>.value(
-      value: _languageBloc,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<LanguageBlocBloc>.value(value: _languageBloc),
+        BlocProvider<LoadingBloc>.value(value: _loadingBloc),
+      ],
       child: BlocBuilder<LanguageBlocBloc, LanguageBlocState>(
         builder: (context, state) {
           if (state is LanguageLoaded) {
@@ -72,7 +80,7 @@ class _MovieAppState extends State<MovieApp> {
                   GlobalCupertinoLocalizations.delegate,
                 ],
                 builder: (context, child) {
-                  return child!;
+                  return LoadingScreen(screen: child!);
                 },
                 initialRoute: RouteList.initial,
                 onGenerateRoute: (RouteSettings settings) {

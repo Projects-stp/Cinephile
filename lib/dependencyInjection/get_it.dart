@@ -17,6 +17,7 @@ import 'package:cinephile/domain/usecases/update_langiage.dart';
 import 'package:cinephile/presentation/blocs/cast/cast_bloc.dart';
 import 'package:cinephile/presentation/blocs/favorite/favotite_bloc.dart';
 import 'package:cinephile/presentation/blocs/language_bloc/language_bloc_bloc.dart';
+import 'package:cinephile/presentation/blocs/loading/loading_bloc.dart';
 import 'package:cinephile/presentation/blocs/movie_backdrop/movie_backdrop_bloc.dart';
 import 'package:cinephile/presentation/blocs/movie_carousel/movie_carousel_bloc.dart';
 import 'package:cinephile/presentation/blocs/movie_detail/movie_detail_bloc.dart';
@@ -161,6 +162,7 @@ Future init() async {
 
   getItInstance.registerFactory(
     () => MovieCarouselBloc(
+      loadingBloc: getItInstance(),
       getTrending: getItInstance(),
       movieBackDropBloc: getItInstance(),
     ),
@@ -180,6 +182,7 @@ Future init() async {
       castBloc: getItInstance(),
       videosBloc: getItInstance(),
       favoriteBloc: getItInstance(),
+      loadingBloc: getItInstance(),
     ),
   );
 
@@ -198,6 +201,7 @@ Future init() async {
   getItInstance.registerFactory(
     () => SearchMovieBloc(
       searchMovies: getItInstance(),
+      loadingBloc: getItInstance(),
     ),
   );
 
@@ -216,4 +220,6 @@ Future init() async {
       getFavoriteMovies: getItInstance(),
     ),
   );
+
+  getItInstance.registerSingleton<LoadingBloc>(LoadingBloc());
 }
