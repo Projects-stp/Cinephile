@@ -8,8 +8,8 @@ A Flutter project that uses TMDb-Api to fetch movies using Bloc and following Cl
 
   <table>
   <tr>
-    <th>Login</th>
-        <th>Register</th>
+    <th>Home Screen- 1</th>
+        <th>Home Screen- 2</th>
     </tr>
     <td> <img src="https://github.com/stp2003/Cinephile/blob/master/screenshots/ss_1.jpg"  alt="1" width = 360px height = 640px ></td>
 
@@ -23,8 +23,8 @@ A Flutter project that uses TMDb-Api to fetch movies using Bloc and following Cl
 
   <table>
   <tr>
-    <th>Home</th>
-        <th>Search</th>
+    <th>Home Screen- 3</th>
+        <th>Detail Screen</th>
     </tr>
     <td> <img src="https://github.com/stp2003/Cinephile/blob/master/screenshots/ss_3.jpg"  alt="1" width = 360px height = 640px ></td>
 
@@ -38,8 +38,8 @@ A Flutter project that uses TMDb-Api to fetch movies using Bloc and following Cl
 
   <table>
   <tr>
-    <th>New Thread </th>
-        <th>Notifications</th>
+    <th>Watch Trailers </th>
+        <th>Search Screen</th>
     </tr>
     <td> <img src="https://github.com/stp2003/Cinephile/blob/master/screenshots/ss_5.jpg"  alt="1" width = 360px height = 640px ></td>
 
@@ -54,8 +54,8 @@ A Flutter project that uses TMDb-Api to fetch movies using Bloc and following Cl
 
   <table>
   <tr>
-    <th>Profile 1</th>
-        <th>Profile 2</th>
+    <th>Nav Bar English</th>
+        <th>Nav Bar Hindi</th>
     </tr>
     <td> <img src="https://github.com/stp2003/Cinephile/blob/master/screenshots/ss_7.jpg"  alt="1" width = 360px height = 640px ></td>
 
@@ -68,8 +68,8 @@ A Flutter project that uses TMDb-Api to fetch movies using Bloc and following Cl
 
    <table>
   <tr>
-    <th>Edit Profile</th>
-        <th>Settings</th>
+    <th>Favorite Screen</th>
+        <th>About Us English </th>
     </tr>
     <td> <img src="https://github.com/stp2003/Cinephile/blob/master/screenshots/ss-9.jpg"  alt="1" width = 360px height = 640px ></td>
 
@@ -81,8 +81,8 @@ A Flutter project that uses TMDb-Api to fetch movies using Bloc and following Cl
 
   <table>
   <tr>
-    <th>Edit Profile</th>
-        <th>Settings</th>
+    <th>About Us Hindi</th>
+        <th>Feedback</th>
     </tr>
     <td> <img src="https://github.com/stp2003/Cinephile/blob/master/screenshots/ss_11.jpg"  alt="1" width = 360px height = 640px ></td>
 
