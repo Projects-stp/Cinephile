@@ -2,6 +2,9 @@
 
 A Flutter project that uses TMDb-Api to fetch movies using Bloc and following Clean architecture.
 
+<a href="https://drive.google.com/file/d/1pisOndpMFmbiS86OAik7Zr5wXAPplS0e/view?usp=sharing" target="_blank">Demo</a>
+
+  <br>
 
 * # Screenshots of the app
 
